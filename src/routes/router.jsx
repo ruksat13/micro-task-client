@@ -6,6 +6,7 @@ import Register from "../pages/Auth/Register";
 import ErrorPage from "../pages/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
+import DashboardRedirect from "./DashboardRedirect";
 
 import WorkerHome from "../dashboard/Worker/WorkerHome";
 import TaskList from "../dashboard/Worker/TaskList";
@@ -44,6 +45,7 @@ const router = createBrowserRouter([
             </PrivateRoute>
         ),
         children: [
+            { index: true, element: <DashboardRedirect /> },
             { path: "worker-home", element: <WorkerHome /> },
             { path: "task-list", element: <TaskList /> },
             { path: "task-details/:id", element: <TaskDetails /> },
