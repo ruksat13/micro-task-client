@@ -12,7 +12,7 @@ const Notifications = () => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const { data: notifications = [] } = useQuery({
+    const { data } = useQuery({
         queryKey: ["notifications", user?.email],
         enabled: !!user?.email,
         refetchInterval: 30000,
@@ -25,6 +25,7 @@ const Notifications = () => {
         },
     });
 
+    const notifications = Array.isArray(data) ? data : [];
     const unreadCount = notifications.filter((n) => !n.read).length;
 
     const handleOpen = async () => {
@@ -44,7 +45,6 @@ const Notifications = () => {
         navigate(notification.actionRoute);
     };
 
-    // Close on outside click
     useEffect(() => {
         const handleOutside = (e) => {
             if (ref.current && !ref.current.contains(e.target)) {
@@ -57,10 +57,7 @@ const Notifications = () => {
 
     return (
         <div className="relative" ref={ref}>
-            <button
-                onClick={handleOpen}
-                className="relative p-2 rounded-full hover:bg-violet-100 transition"
-            >
+            <button onClick={handleOpen} className="relative p-2 rounded-full hover:bg-violet-100 transition">
                 <span className="text-xl">🔔</span>
                 {unreadCount > 0 && (
                     <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
@@ -71,9 +68,7 @@ const Notifications = () => {
 
             {open && (
                 <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl z-50 border border-gray-100 max-h-96 overflow-y-auto">
-                    <div className="p-3 border-b font-semibold text-violet-900">
-                        Notifications
-                    </div>
+                    <div className="p-3 border-b font-semibold text-violet-900">Notifications</div>
                     {notifications.length === 0 ? (
                         <p className="text-center text-gray-400 py-6 text-sm">No notifications</p>
                     ) : (
@@ -84,9 +79,7 @@ const Notifications = () => {
                                 className={`p-3 border-b cursor-pointer hover:bg-violet-50 transition text-sm ${!n.read ? "bg-violet-50" : ""}`}
                             >
                                 <p className="text-gray-700">{n.message}</p>
-                                <p className="text-xs text-gray-400 mt-1">
-                                    {new Date(n.time).toLocaleString()}
-                                </p>
+                                <p className="text-xs text-gray-400 mt-1">{new Date(n.time).toLocaleString()}</p>
                             </div>
                         ))
                     )}
