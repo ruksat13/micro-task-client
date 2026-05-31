@@ -12,7 +12,6 @@ import { auth } from "../utils/firebase.config";
 import axios from "axios";
 
 export const AuthContext = createContext(null);
-
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
@@ -52,12 +51,22 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             if (currentUser) {
                 try {
+                    // Get JWT token
                     const res = await axios.post(
                         `${import.meta.env.VITE_API_URL}/jwt`,
-                        { email: currentUser.email },
-                        { withCredentials: true }
+                        { email: currentUser.email }
                     );
-                    localStorage.setItem("access-token", res.data.token);
+                    const token = res.data.token;
+                    localStorage.setItem("access-token", token);
+
+                    // Save user to DB if not exists
+                    await axios.post(`${import.meta.env.VITE_API_URL}/users`, {
+                        name: currentUser.displayName,
+                        email: currentUser.email,
+                        photo: currentUser.photoURL,
+                        role: "worker",
+                        coins: 10,
+                    });
                 } catch (err) {
                     console.log(err);
                 }
@@ -83,5 +92,4 @@ const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
-
 export default AuthProvider;
