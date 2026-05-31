@@ -6,16 +6,19 @@ const WorkerHome = () => {
     const { user } = useAuth();
     const token = localStorage.getItem("access-token");
 
-    const { data: submissions = [] } = useQuery({
+    const { data = {} } = useQuery({
         queryKey: ["workerSubmissions", user?.email],
+        enabled: !!user?.email,
         queryFn: async () => {
             const res = await axios.get(
                 `${import.meta.env.VITE_API_URL}/submissions/worker/${user.email}?limit=100`,
                 { headers: { authorization: `Bearer ${token}` } }
             );
-            return res.data.submissions || [];
+            return res.data;
         },
     });
+
+    const submissions = Array.isArray(data?.submissions) ? data.submissions : [];
 
     const totalSubmissions = submissions.length;
     const totalPending = submissions.filter((s) => s.status === "pending").length;
