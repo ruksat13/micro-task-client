@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 
 import WorkerHome from "../dashboard/Worker/WorkerHome";
 import TaskList from "../dashboard/Worker/TaskList";
+import TaskDetails from "../dashboard/Worker/TaskDetails";
 import MySubmissions from "../dashboard/Worker/MySubmissions";
 import Withdrawals from "../dashboard/Worker/Withdrawals";
 
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
         children: [
             { path: "worker-home", element: <WorkerHome /> },
             { path: "task-list", element: <TaskList /> },
+            { path: "task-details/:id", element: <TaskDetails /> },
             { path: "my-submissions", element: <MySubmissions /> },
             { path: "withdrawals", element: <Withdrawals /> },
 
