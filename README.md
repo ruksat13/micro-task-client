@@ -1,16 +1,37 @@
-# React + Vite
+# MicroTask - Micro Tasking and Earning Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live Site URL
+https://flourishing-liger-05e60c.netlify.app
 
-Currently, two official plugins are available:
+## Admin Credentials
+- **Email:** akibruksat38326@gmail.com
+- **Password:** Admin123
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- 🔐 Role-based authentication system (Worker, Buyer, Admin) with Firebase
+- 👷 Workers can browse tasks, submit work, and withdraw earnings
+- 🛒 Buyers can create tasks, review submissions, and purchase coins
+- 👑 Admin can manage users, tasks, and approve withdrawal requests
+- 🪙 Coin-based economy: Buyers purchase coins, Workers earn coins
+- 🔔 Real-time notification system for task approvals and rejections
+- 💰 Withdrawal system with minimum 200 coins requirement
+- 📊 Role-specific dashboards with stats and analytics
+- 📱 Fully responsive design for mobile, tablet, and desktop
+- 🔄 Pagination on submission history page
+- 🏆 Top Workers leaderboard on home page
+- 🎨 Beautiful UI with Tailwind CSS and smooth animations
+- 🔒 JWT-based secure API with role verification middleware
+- ⚡ React Query for efficient data fetching and caching
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
+- **Frontend:** React, Vite, Tailwind CSS, React Router
+- **Backend:** Node.js, Express.js, MongoDB
+- **Auth:** Firebase Authentication
+- **Hosting:** Netlify (Client), Render (Server)
 
-## Expanding the ESLint configuration
+## Client Repo
+https://github.com/ruksat13/micro-task-client
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Server Repo
+https://github.com/ruksat13/micro-task-server
