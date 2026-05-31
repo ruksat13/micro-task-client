@@ -3,6 +3,7 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import useUserRole from "../hooks/useUserRole";
 import toast from "react-hot-toast";
+import Notifications from "../components/shared/Notifications";
 
 const DashboardLayout = () => {
     const { user, logOut } = useAuth();
@@ -49,7 +50,11 @@ const DashboardLayout = () => {
                     <Link to="/" className="text-2xl font-bold">Micro<span className="text-yellow-400">Task</span></Link>
                 </div>
                 <div className="p-4 border-b border-violet-700 flex items-center gap-3">
-                    <img src={user?.photoURL || "https://i.ibb.co/5GzXkwq/user.png"} alt="user" className="w-10 h-10 rounded-full object-cover border-2 border-yellow-400" />
+                    <img
+                        src={user?.photoURL || "https://i.ibb.co/5GzXkwq/user.png"}
+                        alt="user"
+                        className="w-10 h-10 rounded-full object-cover border-2 border-yellow-400"
+                    />
                     <div>
                         <p className="font-semibold text-sm truncate">{user?.displayName}</p>
                         <p className="text-xs text-violet-300 capitalize">{role}</p>
@@ -58,27 +63,54 @@ const DashboardLayout = () => {
                 </div>
                 <nav className="p-4 space-y-2">
                     {links.map((link) => (
-                        <Link key={link.to} to={link.to} onClick={() => setSidebarOpen(false)} className="block px-3 py-2 rounded-lg hover:bg-violet-700 transition text-sm">
+                        <Link
+                            key={link.to}
+                            to={link.to}
+                            onClick={() => setSidebarOpen(false)}
+                            className="block px-3 py-2 rounded-lg hover:bg-violet-700 transition text-sm"
+                        >
                             {link.label}
                         </Link>
                     ))}
-                    <Link to="/" className="block px-3 py-2 rounded-lg hover:bg-violet-700 transition text-sm">🌐 Home</Link>
+                    <Link to="/" className="block px-3 py-2 rounded-lg hover:bg-violet-700 transition text-sm">
+                        🌐 Home
+                    </Link>
                 </nav>
             </div>
 
             {/* Overlay */}
             {sidebarOpen && (
-                <div className="fixed inset-0 z-40 bg-black opacity-50 lg:hidden" onClick={() => setSidebarOpen(false)} />
+                <div
+                    className="fixed inset-0 z-40 bg-black opacity-50 lg:hidden"
+                    onClick={() => setSidebarOpen(false)}
+                />
             )}
 
             {/* Main Content */}
             <div className="flex-1 flex flex-col">
                 <header className="bg-white shadow-sm p-4 flex items-center justify-between sticky top-0 z-30">
-                    <button onClick={() => setSidebarOpen(!sidebarOpen)} className="lg:hidden text-gray-600 text-2xl">☰</button>
+                    <button
+                        onClick={() => setSidebarOpen(!sidebarOpen)}
+                        className="lg:hidden text-gray-600 text-2xl"
+                    >
+                        ☰
+                    </button>
                     <div className="flex items-center gap-3 ml-auto">
-                        <span className="bg-violet-100 text-violet-800 px-3 py-1 rounded-full text-sm font-semibold">🪙 {userInfo?.coins || 0}</span>
-                        <img src={user?.photoURL || "https://i.ibb.co/5GzXkwq/user.png"} alt="user" className="w-9 h-9 rounded-full object-cover border-2 border-violet-400" />
-                        <button onClick={handleLogout} className="bg-violet-900 text-white px-3 py-1 rounded text-sm hover:bg-violet-700 transition">Logout</button>
+                        <Notifications />
+                        <span className="bg-violet-100 text-violet-800 px-3 py-1 rounded-full text-sm font-semibold">
+                            🪙 {userInfo?.coins || 0}
+                        </span>
+                        <img
+                            src={user?.photoURL || "https://i.ibb.co/5GzXkwq/user.png"}
+                            alt="user"
+                            className="w-9 h-9 rounded-full object-cover border-2 border-violet-400"
+                        />
+                        <button
+                            onClick={handleLogout}
+                            className="bg-violet-900 text-white px-3 py-1 rounded text-sm hover:bg-violet-700 transition"
+                        >
+                            Logout
+                        </button>
                     </div>
                 </header>
                 <main className="flex-1 p-6">
