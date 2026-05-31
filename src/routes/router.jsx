@@ -7,6 +7,23 @@ import ErrorPage from "../pages/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 
+import WorkerHome from "../dashboard/Worker/WorkerHome";
+import TaskList from "../dashboard/Worker/TaskList";
+import MySubmissions from "../dashboard/Worker/MySubmissions";
+import Withdrawals from "../dashboard/Worker/Withdrawals";
+
+import BuyerHome from "../dashboard/Buyer/BuyerHome";
+import AddTask from "../dashboard/Buyer/AddTask";
+import MyTasks from "../dashboard/Buyer/MyTasks";
+import TaskToReview from "../dashboard/Buyer/TaskToReview";
+import PurchaseCoin from "../dashboard/Buyer/PurchaseCoin";
+import PaymentHistory from "../dashboard/Buyer/PaymentHistory";
+
+import AdminHome from "../dashboard/Admin/AdminHome";
+import ManageUsers from "../dashboard/Admin/ManageUsers";
+import ManageTasks from "../dashboard/Admin/ManageTasks";
+import WithdrawRequests from "../dashboard/Admin/WithdrawRequests";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -25,7 +42,24 @@ const router = createBrowserRouter([
                 <DashboardLayout />
             </PrivateRoute>
         ),
-        children: [],
+        children: [
+            { path: "worker-home", element: <WorkerHome /> },
+            { path: "task-list", element: <TaskList /> },
+            { path: "my-submissions", element: <MySubmissions /> },
+            { path: "withdrawals", element: <Withdrawals /> },
+
+            { path: "buyer-home", element: <BuyerHome /> },
+            { path: "add-task", element: <AddTask /> },
+            { path: "my-tasks", element: <MyTasks /> },
+            { path: "task-to-review", element: <TaskToReview /> },
+            { path: "purchase-coin", element: <PurchaseCoin /> },
+            { path: "payment-history", element: <PaymentHistory /> },
+
+            { path: "admin-home", element: <AdminHome /> },
+            { path: "manage-users", element: <ManageUsers /> },
+            { path: "manage-tasks", element: <ManageTasks /> },
+            { path: "withdraw-requests", element: <WithdrawRequests /> },
+        ],
     },
 ]);
 
